@@ -1,7 +1,7 @@
 FROM docker.io/mediawiki
 
-RUN apt update; \
-    apt install -y wget;
+RUN apt-get update; \
+    apt-get install -y wget;
 
 WORKDIR /tmp
 
