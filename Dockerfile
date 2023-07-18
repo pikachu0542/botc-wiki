@@ -1,7 +1,7 @@
 FROM docker.io/mediawiki
 
 RUN apt-get update; \
-    apt-get install -y wget;
+    apt-get install -y wget unzip;
 
 WORKDIR /tmp
 
@@ -22,3 +22,4 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" &&
 
 # Add our composer.json. This installs the dependencies, I guess.
 COPY composer.local.json .
+RUN composer update
