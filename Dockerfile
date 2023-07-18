@@ -5,9 +5,8 @@ RUN apt-get update; \
 
 WORKDIR /tmp
 
-RUN wget https://extdist.wmflabs.org/dist/extensions/OpenIDConnect-REL1_40-e9d47f2.tar.gz && \
-    tar -xvzf OpenIDConnect-REL1_40-e9d47f2.tar.gz && \
-    mv OpenIDConnect /var/www/html/extensions;
+COPY download_extensions.sh .
+RUN bash download_extensions.sh
 
 WORKDIR /var/www/html
 
