@@ -8,6 +8,9 @@ WORKDIR /tmp
 #COPY download_extensions.sh .
 #RUN bash download_extensions.sh
 
+# Spoilers extension is spaghet and not available through composer
+RUN wget https://github.com/Telshin/Spoilers/archive/master.zip; unzip master.zip; mv Spoilers-master /var/www/html/extensions/Spoilers
+
 WORKDIR /var/www/html
 
 # Install composer, I guess...
@@ -21,7 +24,8 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" &&
 #RUN php /var/www/html/maintenance/update.php
 
 # Add our composer.json. This installs the dependencies, I guess.
-RUN composer self-update 1.10.22
-RUN composer require mediawiki/auth-remoteuser
+RUN composer self-update 1.10.22; \
+    composer require mediawiki/auth-remoteuser;
+
 #COPY composer.local.json .
 #RUN composer update
