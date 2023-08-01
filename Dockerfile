@@ -1,4 +1,4 @@
-FROM docker.io/mediawiki:1.35.0
+FROM docker.io/mediawiki:1.40
 
 RUN apt-get update; \
     apt-get install -y wget unzip;
@@ -30,8 +30,7 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" &&
 #RUN php /var/www/html/maintenance/update.php
 
 # Add our composer.json. This installs the dependencies, I guess.
-RUN composer self-update 1.10.22; \
-    composer require mediawiki/auth-remoteuser;
-
+RUN chown -R www-data:www-data composer.json
+RUN composer require mediawiki/pluggable-auth mediawiki/oauthclient
 #COPY composer.local.json .
 #RUN composer update
