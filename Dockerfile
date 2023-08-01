@@ -1,12 +1,12 @@
-FROM docker.io/mediawiki
+FROM docker.io/mediawiki:1.35.0
 
 RUN apt-get update; \
     apt-get install -y wget unzip;
 
 WORKDIR /tmp
 
-COPY download_extensions.sh .
-RUN bash download_extensions.sh
+#COPY download_extensions.sh .
+#RUN bash download_extensions.sh
 
 WORKDIR /var/www/html
 
@@ -21,5 +21,5 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" &&
 #RUN php /var/www/html/maintenance/update.php
 
 # Add our composer.json. This installs the dependencies, I guess.
-COPY composer.local.json .
-RUN composer update
+#COPY composer.local.json .
+#RUN composer update
