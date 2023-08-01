@@ -21,5 +21,7 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" &&
 #RUN php /var/www/html/maintenance/update.php
 
 # Add our composer.json. This installs the dependencies, I guess.
+RUN composer self-update 1.10.22
+RUN composer require mediawiki/auth-remoteuser
 #COPY composer.local.json .
 #RUN composer update
