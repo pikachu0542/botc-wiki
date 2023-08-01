@@ -8,8 +8,14 @@ WORKDIR /tmp
 #COPY download_extensions.sh .
 #RUN bash download_extensions.sh
 
-# Spoilers extension is spaghet and not available through composer
-RUN wget https://github.com/Telshin/Spoilers/archive/master.zip; unzip master.zip; mv Spoilers-master /var/www/html/extensions/Spoilers
+# extension is spaghet and not available through composer
+RUN wget https://github.com/Telshin/Spoilers/archive/master.zip; \
+    unzip master.zip; \
+    mv Spoilers-master /var/www/html/extensions/Spoilers; \
+    rm master.zip; \
+    wget https://github.com/Pavelovich/WikiBanner/archive/master.zip; \
+    unzip master.zip; \
+    mv WikiBanner-master /var/www/html/extensions/WikiBanner;
 
 WORKDIR /var/www/html
 
