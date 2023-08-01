@@ -32,5 +32,6 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" &&
 # Add our composer.json. This installs the dependencies, I guess.
 RUN chown -R www-data:www-data composer.json
 RUN composer require mediawiki/pluggable-auth mediawiki/oauthclient
+RUN composer update
 #COPY composer.local.json .
 #RUN composer update
