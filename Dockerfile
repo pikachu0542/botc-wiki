@@ -28,7 +28,7 @@ RUN wget https://github.com/Telshin/Spoilers/archive/master.zip; \
 
 WORKDIR /var/www/html
 
-RUN mkdir images/temp # For thumbnails and the like
+RUN mkdir images/temp; chown -R www-data:www-data images/temp # For thumbnails and the like
 
 # Install composer, I guess...
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
