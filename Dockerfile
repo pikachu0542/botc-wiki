@@ -15,7 +15,12 @@ RUN wget https://github.com/Telshin/Spoilers/archive/master.zip; \
     rm master.zip; \
     wget https://github.com/Pavelovich/WikiBanner/archive/master.zip; \
     unzip master.zip; \
-    mv WikiBanner-master /var/www/html/extensions/WikiBanner;
+    mv WikiBanner-master /var/www/html/extensions/WikiBanner; \
+    rm master.zip; \
+    wget https://github.com/wikimedia/mediawiki-extensions-OpenIDConnect/archive/refs/heads/master.zip; \
+    unzip master.zip; \
+    mv mediawiki-extensions-OpenIDConnect-master /var/www/html/extensions/OpenIDConnect; \
+    rm master.zip;
 
 WORKDIR /var/www/html
 
@@ -26,12 +31,6 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" &&
     php -r "unlink('composer-setup.php');" && \
     mv composer.phar /usr/local/bin/composer
 
-# TODO: How to run update script? Methinks I need creds
-#RUN php /var/www/html/maintenance/update.php
-
-# Add our composer.json. This installs the dependencies, I guess.
 RUN chown -R www-data:www-data composer.json
-RUN composer require mediawiki/pluggable-auth mediawiki/oauthclient
+RUN composer require mediawiki/pluggable-auth jumbojett/openid-connect-php
 RUN composer update
-#COPY composer.local.json .
-#RUN composer update

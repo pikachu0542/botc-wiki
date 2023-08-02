@@ -1,12 +1,6 @@
 {
-        "extra": {
-                "merge-plugin": {
-                        "include": [
-                                "extensions/*/composer.json",
-                                "skins/*/composer.json",
-                                "extensions/OpenIDConnect/composer.json"
-                        ]
-                }
-      }
+    "require": {
+        "mediawiki/openidconnect": "dev-master"
+    }
 }
 
