@@ -1,30 +1,13 @@
 FROM docker.io/mediawiki:1.40
 
 RUN apt-get update; \
-    apt-get install -y wget unzip vim;
+    apt-get install -y wget unzip;
 
 WORKDIR /tmp
 
-#COPY download_extensions.sh .
-#RUN bash download_extensions.sh
-
 # extension is spaghet and not available through composer
-RUN wget https://github.com/Telshin/Spoilers/archive/master.zip; \
-    unzip master.zip; \
-    mv Spoilers-master /var/www/html/extensions/Spoilers; \
-    rm master.zip; \
-    wget https://github.com/Pavelovich/WikiBanner/archive/master.zip; \
-    unzip master.zip; \
-    mv WikiBanner-master /var/www/html/extensions/WikiBanner; \
-    rm master.zip; \
-    wget https://github.com/wikimedia/mediawiki-extensions-OpenIDConnect/archive/refs/heads/master.zip; \
-    unzip master.zip; \
-    mv mediawiki-extensions-OpenIDConnect-master /var/www/html/extensions/OpenIDConnect; \
-    rm master.zip; \
-    wget https://github.com/WillNilges/mediawiki-aws-s3/archive/refs/heads/master.zip; \
-    unzip master.zip; \
-    mv mediawiki-aws-s3-master /var/www/html/extensions/AWS; \
-    rm master.zip; 
+COPY download_git_extensions.sh .
+RUN bash download_git_extensions.sh
 
 WORKDIR /var/www/html
 
@@ -38,7 +21,8 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" &&
     mv composer.phar /usr/local/bin/composer
 
 RUN chown -R www-data:www-data composer.json
+
+# edwardspec/mediawiki-aws-s3 has old version of AWS SDK that causes problems
 RUN composer require mediawiki/pluggable-auth jumbojett/openid-connect-php
-#edwardspec/mediawiki-aws-s3
 COPY composer.local.json .
 RUN composer update
