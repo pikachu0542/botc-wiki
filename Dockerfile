@@ -32,5 +32,5 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" &&
     mv composer.phar /usr/local/bin/composer
 
 RUN chown -R www-data:www-data composer.json
-RUN composer require mediawiki/pluggable-auth jumbojett/openid-connect-php
+RUN composer require mediawiki/pluggable-auth jumbojett/openid-connect-php edwardspec/mediawiki-aws-s3
 RUN composer update
