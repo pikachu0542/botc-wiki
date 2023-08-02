@@ -1,6 +1,9 @@
 {
-    "require": {
-        "mediawiki/openidconnect": "dev-master"
-    }
+	"extra": {
+		"merge-plugin": {
+			"include": [
+				"extensions/AWS/composer.json"
+			]
+		}
+	}
 }
-

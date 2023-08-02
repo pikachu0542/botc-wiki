@@ -1,7 +1,7 @@
 FROM docker.io/mediawiki:1.40
 
 RUN apt-get update; \
-    apt-get install -y wget unzip;
+    apt-get install -y wget unzip vim;
 
 WORKDIR /tmp
 
@@ -20,7 +20,11 @@ RUN wget https://github.com/Telshin/Spoilers/archive/master.zip; \
     wget https://github.com/wikimedia/mediawiki-extensions-OpenIDConnect/archive/refs/heads/master.zip; \
     unzip master.zip; \
     mv mediawiki-extensions-OpenIDConnect-master /var/www/html/extensions/OpenIDConnect; \
-    rm master.zip;
+    rm master.zip; \
+    wget https://github.com/WillNilges/mediawiki-aws-s3/archive/refs/heads/master.zip; \
+    unzip master.zip; \
+    mv mediawiki-aws-s3-master /var/www/html/extensions/AWS; \
+    rm master.zip; 
 
 WORKDIR /var/www/html
 
@@ -32,5 +36,6 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" &&
     mv composer.phar /usr/local/bin/composer
 
 RUN chown -R www-data:www-data composer.json
-RUN composer require mediawiki/pluggable-auth jumbojett/openid-connect-php edwardspec/mediawiki-aws-s3
+RUN composer require mediawiki/pluggable-auth jumbojett/openid-connect-php
+#edwardspec/mediawiki-aws-s3
 RUN composer update
