@@ -1,11 +1,9 @@
 {
-        "extra": {
-                "merge-plugin": {
-                        "include": [
-                                "extensions/*/composer.json",
-                                "skins/*/composer.json",
-                                "extensions/OpenIDConnect/composer.json"
-                        ]
-                }
-      }
+	"extra": {
+		"merge-plugin": {
+			"include": [
+				"extensions/AWS/composer.json"
+			]
+		}
+	}
 }

@@ -1,14 +1,17 @@
-FROM docker.io/mediawiki
+FROM docker.io/mediawiki:1.40
 
 RUN apt-get update; \
     apt-get install -y wget unzip;
 
 WORKDIR /tmp
 
-COPY download_extensions.sh .
-RUN bash download_extensions.sh
+# extension is spaghet and not available through composer
+COPY download_git_extensions.sh .
+RUN bash download_git_extensions.sh
 
 WORKDIR /var/www/html
+
+COPY csh-wiki-logo.png images/
 
 # Install composer, I guess...
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
@@ -17,9 +20,9 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" &&
     php -r "unlink('composer-setup.php');" && \
     mv composer.phar /usr/local/bin/composer
 
-# TODO: How to run update script? Methinks I need creds
-#RUN php /var/www/html/maintenance/update.php
+RUN chown -R www-data:www-data composer.json
 
-# Add our composer.json. This installs the dependencies, I guess.
+# edwardspec/mediawiki-aws-s3 has old version of AWS SDK that causes problems
+RUN composer require mediawiki/pluggable-auth jumbojett/openid-connect-php
 COPY composer.local.json .
 RUN composer update
