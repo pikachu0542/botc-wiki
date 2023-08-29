@@ -1,7 +1,7 @@
 FROM docker.io/mediawiki:1.40
 
 RUN apt-get update; \
-    apt-get install -y wget unzip;
+    apt-get install -y wget unzip libldap-dev;
 
 WORKDIR /tmp
 
@@ -19,6 +19,9 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" &&
     php composer-setup.php && \
     php -r "unlink('composer-setup.php');" && \
     mv composer.phar /usr/local/bin/composer
+
+RUN docker-php-ext-configure ldap && \
+  docker-php-ext-install -j$(nproc) ldap
 
 RUN chown -R www-data:www-data composer.json
 
