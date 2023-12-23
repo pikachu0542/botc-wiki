@@ -31,6 +31,6 @@ RUN docker-php-ext-configure ldap && \
 RUN chown -R www-data:www-data composer.json
 
 # edwardspec/mediawiki-aws-s3 has old version of AWS SDK that causes problems
-RUN composer require mediawiki/pluggable-auth jumbojett/openid-connect-php
+RUN composer require mediawiki/pluggable-auth jumbojett/openid-connect-php:0.9.10
 COPY composer.local.json .
 RUN composer update
