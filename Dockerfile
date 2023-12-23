@@ -1,5 +1,8 @@
 FROM docker.io/mediawiki:1.40
 
+COPY remoteip.conf /etc/apache2/mods-available/
+RUN a2enmod remoteip
+
 RUN apt-get update; \
     apt-get install -y wget unzip libldap-dev;
 
