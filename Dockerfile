@@ -1,4 +1,4 @@
-FROM docker.io/mediawiki:1.40
+FROM docker.io/mediawiki:1.43
 
 COPY remoteip.conf /etc/apache2/mods-available/
 RUN a2enmod remoteip
