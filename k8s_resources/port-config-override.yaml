@@ -1,25 +1,25 @@
-kind: ConfigMap
-apiVersion: v1
-metadata:
-  name: port-config-override
-immutable: false
-data:
-  000-default.conf: |
-    <VirtualHost *:8080>
-      ServerAdmin webmaster@localhost
-      DocumentRoot /var/www/html
-      ErrorLog ${APACHE_LOG_DIR}/error.log
-      CustomLog ${APACHE_LOG_DIR}/access.log combined
-      AllowEncodedSlashes NoDecode
-    </VirtualHost>
-  ports.conf: |
-    Listen 8080
+# kind: ConfigMap
+# apiVersion: v1
+# metadata:
+#   name: port-config-override
+# immutable: false
+# data:
+#   000-default.conf: |
+#     <VirtualHost *:8080>
+#       ServerAdmin webmaster@localhost
+#       DocumentRoot /var/www/html
+#       ErrorLog ${APACHE_LOG_DIR}/error.log
+#       CustomLog ${APACHE_LOG_DIR}/access.log combined
+#       AllowEncodedSlashes NoDecode
+#     </VirtualHost>
+#   ports.conf: |
+#     Listen 8080
 
-    <IfModule ssl_module>
-            Listen 8443
-    </IfModule>
+#     <IfModule ssl_module>
+#             Listen 8443
+#     </IfModule>
 
-    <IfModule mod_gnutls.c>
-            Listen 8443
-    </IfModule>
+#     <IfModule mod_gnutls.c>
+#             Listen 8443
+#     </IfModule>
 
