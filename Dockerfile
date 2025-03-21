@@ -1,6 +1,6 @@
 FROM docker.io/mediawiki:1.43
 
-COPY remoteip.conf /etc/apache2/mods-available/
+# COPY remoteip.conf /etc/apache2/mods-available/
 RUN a2enmod remoteip
 
 RUN apt-get update; \
