@@ -5,9 +5,7 @@ metadata:
 immutable: false
 data:
   000-default.conf: |
-    ServerName botc-wiki.cs.house:8080
     <VirtualHost *:8080>
-      ServerName botc-wiki.cs.house:8080
       ServerAdmin webmaster@localhost
       DocumentRoot /var/www/html
       ErrorLog ${APACHE_LOG_DIR}/error.log
