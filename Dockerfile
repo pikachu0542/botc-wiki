@@ -12,7 +12,7 @@ WORKDIR /tmp
 # COPY download_git_extensions.sh .
 # RUN bash download_git_extensions.sh
 
-# WORKDIR /var/www/html
+WORKDIR /var/www/html
 
 # COPY csh-wiki-logo.png images/
 
