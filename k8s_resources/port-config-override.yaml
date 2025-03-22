@@ -5,6 +5,7 @@ metadata:
 immutable: false
 data:
   000-default.conf: |
+    ServerName https://botc-wiki.cs.house:8080
     <VirtualHost *:8080>
       ServerAdmin webmaster@localhost
       DocumentRoot /var/www/html
