@@ -5,6 +5,7 @@ metadata:
 immutable: false
 data:
   000-default.conf: |
+    ServerName botc-wiki.cs.house:8080
     <VirtualHost *:8080>
       ServerAdmin webmaster@localhost
       DocumentRoot /var/www/html
@@ -14,7 +15,6 @@ data:
     </VirtualHost>
   ports.conf: |
     Listen 8080
-    ServerName botc-wiki.cs.house
     <IfModule ssl_module>
             Listen 8443
     </IfModule>
